@@ -27,9 +27,20 @@ module.exports = function(config) {
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
       'app/scripts/**/*.js',
+      'app/views/**/*.html',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
+
+    preprocessors: {
+        //location of templates
+        'app/views/**/*.html': 'html2js'
+    },
+
+    ngHtml2JsPreprocessor: {
+        // strip app from the file path
+        stripPrefix: 'app/'
+    },
 
     // list of files / patterns to exclude
     exclude: [],
@@ -52,7 +63,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-ng-html2js-preprocessor'
     ],
 
     // Continuous Integration mode

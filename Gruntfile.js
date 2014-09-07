@@ -7,7 +7,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
@@ -37,7 +37,14 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: 35726
+        }
+      },
+      templates: {
+        files: ['<%= yeoman.app %>/views/{,*/}*.html'],
+        tasks: ['ngtemplates'],
+        options: {
+          livereload: 35726
         }
       },
       jsTest: {
@@ -259,21 +266,20 @@ module.exports = function (grunt) {
       }
     },
 
-    htmlmin: {
-      dist: {
-        options: {
-          collapseWhitespace: true,
-          conservativeCollapse: true,
-          collapseBooleanAttributes: true,
-          removeCommentsFromCDATA: true,
-          removeOptionalTags: true
+    ngtemplates: {
+      app: {
+        options : {
+          htmlmin: {
+            collapseWhitespace: true,
+            collapseBooleanAttributes: true,
+            removeCommentsFromCDATA: true,
+            removeOptionalTags: true
+          },
+          module: 'couchD3App',
         },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
+        cwd: 'app',
+        src: 'views/**.html',
+        dest: '<%= yeoman.dist %>/scripts/templates.js'
       }
     },
 
@@ -398,9 +404,10 @@ module.exports = function (grunt) {
     'cdnify',
     'cssmin',
     'uglify',
+    'ngtemplates',
     'filerev',
-    'usemin',
-    'htmlmin'
+    'usemin'
+    // 'htmlmin'
   ]);
 
   grunt.registerTask('default', [
