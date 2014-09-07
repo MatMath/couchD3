@@ -11,7 +11,7 @@ describe('Directive: couchJson', function() {
   beforeEach(inject(function($rootScope, $compile) {
     el = angular.element('<couch-json></couch-json>');
     scope = $rootScope.$new();
-
+    // scope.fetchingTo = 'https://matmath.iriscouch.com/';
     compileFunction = $compile(el);
     scope.$digest();
     // bring html from templateCache
@@ -25,7 +25,10 @@ describe('Directive: couchJson', function() {
 
       console.log('post link', el.html());
 
-      expect(el.text()).toBe('this is the couchJson directive');
+      expect(el.find('button').text().trim()).toEqual('Fetch URL');
+      expect(el.find('input').val().trim()).toEqual(scope.fetchingTo);
+
+      // expect(el.find('h1').text().trim()).toEqual('Community Corpus');
     });
   });
 });

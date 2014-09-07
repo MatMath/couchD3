@@ -1,7 +1,12 @@
 <div>
-	<button>Fetch URL</button>
+	<button ng-click="httpGet(fetchingTo, user, pass)">
+		Fetch URL
+	</button>
 	<input ng-model="fetchingTo"/>
+	<input ng-model="user"/>
+	<input ng-model="pass"/>
 </div>
 <div>
-	<pre>{{receivedData | json}}</pre>
+	<pre>{{fetchingTo | json}}</pre>
+	<pre>{{responseResult | json}}</pre>
 </div>
