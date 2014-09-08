@@ -30,16 +30,7 @@ angular.module('couchD3App').directive('d3Display', function() {
 				width: width,
 				height: height
 			});
-		var centering = svg.append('g');
-				// .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-
-		// add the <path>s for each arc slice
-		var arcsSize = centering.selectAll('path').data(pie(scope.data))
-			.enter().append('path')
-			.style('stroke', 'white')
-			.attr('fill', function(d, i) {
-				return color(i);
-			});
+		
 		svg.on('mousedown', function(d) {
 			// yo angular, the code in this callback might make a change to the scope!
 			// so be sure to apply $watch's and catch errors.
@@ -51,81 +42,85 @@ angular.module('couchD3App').directive('d3Display', function() {
 			});
 		});
 
-		// function arcTween(a) {
-		// 	// see: http://bl.ocks.org/mbostock/1346410
-		// 	var i = d3.interpolate(scope._current, a);
-		// 	scope._current = i(0);
-		// 	return function(t) {
-		// 		return arc(i(t));
-		// 	};
-		// }
+		function arcTween(a) {
+			// see: http://bl.ocks.org/mbostock/1346410
+			var i = d3.interpolate(scope._current, a);
+			scope._current = i(0);
+			return function(t) {
+				return arc(i(t));
+			};
+		}
 
 		// add the <path>s for each arc slice
-		// var arcs = svg.selectAll('path.arc').data(pie(scope.data))
-		// 	.enter().append('path')
-		// 	.attr('class', 'arc')
-		// 	.style('stroke', 'white')
-		// 	.attr('fill', function(d, i) {
-		// 		return color(i);
-		// 	})
-		// 	// store the initial angles
-		// 	.each(function(d) {
-		// 		scope._current = d;
-		// 		return;
-		// 	});
+		// All modification in the arc actually modify the item inside "svg"
+		var arcs = svg.selectAll('path.arc').data(pie(scope.data))
+			.enter().append('path')
+			.attr('class', 'arc')
+			.style('stroke', 'white')
+			.attr('fill', function(d, i) {
+				return color(i);
+			})
+			// store the initial angles
+			.each(function(d) {
+				scope._current = d;
+				return;
+			});
 
 		// our data changed! update the arcs, adding, updating, or removing 
 		// elements as needed
-		// scope.$watch('data', function(newData, oldData) {
-		// 	if (newData === undefined) {
-		// 		return;
-		// 	}
-		// 	var data = newData.slice(0); // copy
-		// 	var duration = 500;
-		// 	var PI = Math.PI;
-		// 	while (data.length < oldData.length) {
-		// 		data.push(0);
-		// 	}
-		// 	arcs = svg.selectAll('.arc').data(pie(data));
-		// 	arcs.transition().duration(duration).attrTween('d', arcTween);
-		// 	// transition in any new slices
-		// 	arcs.enter().append('path')
-		// 		.style('stroke', 'white')
-		// 		.attr('class', 'arc')
-		// 		.attr('fill', function(d, i) {
-		// 			return color(i);
-		// 		})
-		// 		.each(function(d) {
-		// 			console.log(d);
-		// 			this._current = {
-		// 				startAngle: 2 * PI - 0.001,
-		// 				endAngle: 2 * PI
-		// 			};
-		// 		})
-		// 		.transition().duration(duration).attrTween('d', arcTween);
-		// 	// transition out any slices with size = 0
-		// 	arcs.filter(function(d) {
-		// 		return d.data === 0;
-		// 	})
-		// 		.transition()
-		// 		.duration(duration)
-		// 		.each(function(d) {
-		// 			d.startAngle = 2 * PI - 0.001;
-		// 			d.endAngle = 2 * PI;
-		// 		})
-		// 		.attrTween('d', arcTween).remove();
-		// });
+		scope.$watch('data', function(newData, oldData) {
+			if (newData === undefined) {
+				// if no data return so it wont make an error.
+				return;
+			}
+			var data = newData.slice(0); // copy
+			var duration = 500;
+			var PI = Math.PI;
+			while (data.length < oldData.length) {
+				data.push(0);
+			}
+			arcs = svg.selectAll('.arc').data(pie(data));
+			arcs.transition().duration(duration).attrTween('d', arcTween);
+			// transition in any new slices
+			arcs.enter().append('path')
+				.style('stroke', 'white')
+				.attr('class', 'arc')
+				.attr('fill', function(d, i) {
+					return color(i);
+				})
+				.each(function(d) {
+					console.log(d);
+					this._current = {
+						startAngle: 2 * PI - 0.001,
+						endAngle: 2 * PI
+					};
+				})
+				.transition().duration(duration).attrTween('d', arcTween);
+			// transition out any slices with size = 0
+			arcs.filter(function(d) {
+				return d.data === 0;
+			})
+				.transition()
+				.duration(duration)
+				.each(function(d) {
+					d.startAngle = 2 * PI - 0.001;
+					d.endAngle = 2 * PI;
+				})
+				.attrTween('d', arcTween).remove();
+		});
 
 		scope.$watch(function() {
+			// If any elemet in the width or height, it will trigger the next function
 			return el.clientWidth * el.clientHeight;
 		}, function() {
+			// When the width change we need to modify all element associated with that width and height
 			width = el.clientWidth;
 			height = el.clientHeight;
 			min = Math.min(width, height);
 			arc.outerRadius(min / 2 * 0.9).innerRadius(min / 2 * 0.5);
 			svg.attr({width: width, height: height});
-			centering.attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-			arcsSize.attr('d', arc);
+			arcs.attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+			arcs.attr('d', arc);
 		});
 		
 	};
