@@ -17,7 +17,7 @@ angular.module('couchD3App').directive('donutDisplay', function() {
 		}
 		// the D3 bits..
 		var color = d3.scale.category10();
-		var el = element[0];
+		var el = element.find('svg')[0];
 		var width = el.clientWidth;
 		var height = el.clientHeight;
 		var min = Math.min(width, height);
@@ -25,7 +25,7 @@ angular.module('couchD3App').directive('donutDisplay', function() {
 		var arc = d3.svg.arc()
 			.outerRadius(min / 2 * 0.9)
 			.innerRadius(min / 2 * 0.5);
-		var svg = d3.select(el).append('svg')
+		var svg = d3.select(el)
 			.attr({
 				width: width,
 				height: height
@@ -111,11 +111,11 @@ angular.module('couchD3App').directive('donutDisplay', function() {
 
 		scope.$watch(function() {
 			// If any elemet in the width or height, it will trigger the next function
-			return el.clientWidth * el.clientHeight;
+			return element[0].clientWidth * element[0].clientHeight;
 		}, function() {
 			// When the width change we need to modify all element associated with that width and height
-			width = el.clientWidth;
-			height = el.clientHeight;
+			width = element[0].clientWidth;
+			height = element[0].clientHeight;
 			min = Math.min(width, height);
 			arc.outerRadius(min / 2 * 0.9).innerRadius(min / 2 * 0.5);
 			svg.attr({width: width, height: height});
