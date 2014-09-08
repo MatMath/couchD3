@@ -5,11 +5,11 @@
 
 /**
  * @ngdoc directive
- * @name couchD3App.directive:d3Display
+ * @name couchD3App.directive:donutDisplay
  * @description
- * # d3Display
+ * # donutDisplay
  */
-angular.module('couchD3App').directive('d3Display', function() {
+angular.module('couchD3App').directive('donutDisplay', function() {
 
 	var link = function link(scope, element) {
 		if (scope.data === undefined) {

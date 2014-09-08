@@ -1,15 +1,15 @@
 'use strict';
 
-describe('Directive: d3Display', function() {
+describe('Directive: donutDisplay', function() {
 
   // load the directive's module
-  beforeEach(module('couchD3App', 'views/d3BarGraph.html'));
+  beforeEach(module('couchD3App', 'views/graphInfo.html'));
 
   var el, scope, compileFunction;
   // var element, scope;
 
   beforeEach(inject(function($rootScope, $compile) {
-    el = angular.element('<d3-display></d3-display>');
+    el = angular.element('<donut-display></donut-display>');
     scope = $rootScope.$new();
     compileFunction = $compile(el);
     scope.$digest();
@@ -22,7 +22,7 @@ describe('Directive: d3Display', function() {
       compileFunction(scope); // <== the html {{}} are bound
       scope.$digest(); // <== digest to get the render to show the bound values
       console.log('post link', el.html());
-      expect(el.find('h1').text().trim()).toEqual('Graph');
+      expect(el.find('').text().trim()).toEqual('');
     });
   });
 });
