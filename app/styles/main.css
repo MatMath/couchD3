@@ -77,3 +77,9 @@ body {
     border-bottom: 0;
   }
 }
+
+d3-display {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
