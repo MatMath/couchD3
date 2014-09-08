@@ -8,7 +8,7 @@
  * # MainCtrl
  * Controller of the couchD3App
  */
-angular.module('couchD3App').controller('MainCtrl', function($scope) {
+angular.module('couchD3App').controller('MainCtrl', function($scope, $window) {
 	$scope.awesomeThings = [
 		'HTML5 Boilerplate',
 		'AngularJS',
@@ -17,14 +17,18 @@ angular.module('couchD3App').controller('MainCtrl', function($scope) {
 
 	// controller "knows" nothing about donut charts
 	// Sample data "Array of Array containing numbers only" for the donut charts
-	$scope.donuts = d3.range(3).map(function() {
-			return d3.range(5).map(Math.random);
-		});
+	$scope.donuts = d3.range(10).map(function() {
+		return d3.range(5).map(Math.random);
+	});
 	$scope.chartClicked = function(index) {
 		var n = Math.round(Math.random() * 9) + 1;
 		$scope.donuts[index] = d3.range(n).map(function() {
 			return Math.random();
 		});
 	};
+
+	angular.element($window).on('resize', function() {
+		$scope.$apply();
+	});
 
 });

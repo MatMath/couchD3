@@ -25,8 +25,17 @@
     <couch-json></couch-json>
     <h1>Selector for the graph</h1>
     <h1>Map reduce exemple "Box" you should have for that type of graph to work</h1>
-    <d3-display ng-repeat="donut in donuts" data="donut" on-click="chartClicked($index)"></d3-display>
-    <pre>{{donuts | json}}</pre>
+
+    <d3-display ng-repeat="donut in donuts" 
+        data="donut" 
+        ng-style="{width: 100 / donuts.length + '%'}"
+        on-click="chartClicked($index)">
+    </d3-display>
+    
+
+    <!-- To show the user what he receive as data -->
+    <!-- <pre>{{donuts | json}}</pre> -->
+    <!-- To show a sniped of the data it shoudl have for that graph: -->
 
 
 
