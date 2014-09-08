@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="couchD3App">
+  <body ng-app="couchD3App" ng-controller="MainCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -25,7 +25,8 @@
     <couch-json></couch-json>
     <h1>Selector for the graph</h1>
     <h1>Map reduce exemple "Box" you should have for that type of graph to work</h1>
-    <d3-display data-data="[10,3,50]" ></d3-display>
+    <d3-display ng-repeat="donut in donuts" data="donut" on-click="chartClicked($index)"></d3-display>
+    <pre>{{donuts | json}}</pre>
 
 
 
