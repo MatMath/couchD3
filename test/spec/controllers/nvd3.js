@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: Nvd3Ctrl', function () {
+describe('Controller: BarNvd3Ctrl', function () {
 
   // load the controller's module
   beforeEach(module('couchD3App'));
 
-  var Nvd3Ctrl,
+  var BarNvd3Ctrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    Nvd3Ctrl = $controller('Nvd3Ctrl', {
+    BarNvd3Ctrl = $controller('BarNvd3Ctrl', {
       $scope: scope
     });
   }));

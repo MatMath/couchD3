@@ -4,17 +4,17 @@
 
 /**
  * @ngdoc function
- * @name couchD3App.controller:Nvd3Ctrl
+ * @name couchD3App.controller:BarNvd3Ctrl
  * @description
- * # Nvd3Ctrl
+ * # BarNvd3Ctrl
  * Controller of the couchD3App
  */
-angular.module('couchD3App').controller('Nvd3Ctrl', function($scope) {
+angular.module('couchD3App').controller('BarNvd3Ctrl', function($scope) {
 	/* Chart options */
 	$scope.options = {
 		chart: {
 			type: 'discreteBarChart',
-			height: 450,
+			height: 300,
 			margin: {
 				top: 20,
 				right: 20,
@@ -43,7 +43,7 @@ angular.module('couchD3App').controller('Nvd3Ctrl', function($scope) {
 	};
 
 	/* Chart data */
-	$scope.data = [{
+	$scope.discreteBarCharData = [{
 		key: 'Cumulative Return',
 		values: [{
 			'label': 'A',
@@ -71,5 +71,19 @@ angular.module('couchD3App').controller('Nvd3Ctrl', function($scope) {
 			'value': -5.1387322875705
 		}]
 	}];
+
+	// Demo Sample exemple
+	$scope.discreteBarChartSampleData = {
+		values: [{
+			'label': 'A',
+			'value': -29.765957771107
+		}, {
+			'label': 'B',
+			'value': 0
+		}, {
+			'label': 'C',
+			'value': 32.807804682612
+		}]
+	};
 
 });

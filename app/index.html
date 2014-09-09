@@ -28,33 +28,29 @@
     <h1>Map reduce exemple "Box" you should have for that type of graph to work</h1>
 
 
-    <div ng-controller="Nvd3Ctrl">
-        <pre>Chart start here</pre>
-        <nvd3 options="options" data="data"></nvd3>
-        <pre>Chart End here</pre>
+    <div ng-controller="BarNvd3Ctrl">
+        <nvd3 options="options" data="discreteBarCharData"></nvd3>
+        <h2>
+            <span ng-show="details" ng-click="details = false">Show Details</span>
+            <span ng-hide="details" ng-click="details = true">Hide details</span>
+        </h2>
+        <pre ng-hide="details">Value Needed for the graph to display: {{discreteBarChartSampleData.values | json}}</pre>
+        <pre ng-hide="details">Sniped of Value obtained: {{discreteBarCharData[0].values[0] | json}}</pre>
     </div>
 
-    <donut-display ng-repeat="donut in donuts" 
+    <!-- <donut-display ng-repeat="donut in donuts" 
         data="donut" 
         ng-style="{width: 100 / donuts.length + '%'}"
         on-click="chartClicked($index)">
     </donut-display>
 
-    <simple-bar-chart></simple-bar-chart>
+    <simple-bar-chart></simple-bar-chart> -->
     
 
     <!-- To show the user what he receive as data -->
     <!-- <pre>{{donuts | json}}</pre> -->
     <!-- To show a sniped of the data it shoudl have for that graph: -->
 
-
-
-    <!-- build:js(.) scripts/oldieshim.js -->
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <![endif]-->
-    <!-- endbuild -->
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
