@@ -73,7 +73,7 @@ angular.module('couchD3App').controller('BarNvd3Ctrl', function($scope) {
 	}];
 
 	// Demo Sample exemple
-	$scope.discreteBarChartSampleData = {
+	$scope.discreteChartSampleData = {
 		values: [{
 			'label': 'A',
 			'value': -29.765957771107
@@ -83,7 +83,8 @@ angular.module('couchD3App').controller('BarNvd3Ctrl', function($scope) {
 		}, {
 			'label': 'C',
 			'value': 32.807804682612
-		}]
+		}],
+		details: 'If 2 value have the same label they will overlap.'
 	};
 
 });
