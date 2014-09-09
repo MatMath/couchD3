@@ -42,7 +42,25 @@
     </div>
 
     <!-- Div for the Bar graph and it's controller. -->
-    <div ng-controller="Linegraphnvd3Ctrl" ng-show="true">
+    <div ng-controller="Linegraphnvd3Ctrl" ng-show="false">
+        <nvd3 options="options" data="discreteChartData"></nvd3>
+        <h3>
+            <span ng-show="details" ng-click="details = false">Show Details</span>
+            <span ng-hide="details" ng-click="details = true">Hide details</span>
+        </h3>
+        <h4 ng-hide="details">General info: {{discreteChartSampleData.details}}</h4>
+        <pre ng-hide="details">Value needed for the graph to display: {{discreteChartSampleData.values | json}}</pre>
+        <pre ng-hide="details">Sniped of source value in : 
+discreteChartData[0].values[0]
+            {{discreteChartData[0].values[0] | json}}
+            
+and discreteChartData[1].values[0] :
+            {{discreteChartData[1].values[0] | json}}
+        </pre>
+    </div>
+
+    <!-- Div for the Bar graph and it's controller. -->
+    <div ng-controller="LineplusbarwithfocuschartCtrl" ng-show="true">
         <nvd3 options="options" data="discreteChartData"></nvd3>
         <h3>
             <span ng-show="details" ng-click="details = false">Show Details</span>
@@ -99,6 +117,7 @@ and discreteChartData[1].values[0] :
         <script src="scripts/directives/simplebarchart.js"></script>
         <script src="scripts/controllers/barnvd3.js"></script>
         <script src="scripts/controllers/linegraphnvd3.js"></script>
+        <script src="scripts/controllers/lineplusbarwithfocuschart.js"></script>
         <!-- endbuild -->
 </body>
 </html>
