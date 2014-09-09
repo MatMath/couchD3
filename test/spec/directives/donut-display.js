@@ -9,9 +9,17 @@ describe('Directive: donutDisplay', function() {
   // var element, scope;
 
   beforeEach(inject(function($rootScope, $compile) {
-    el = angular.element('<donut-display></donut-display>');
+    // el = angular.element('<div></div>'); 
+    el = angular.element('<donut-display data="donuts[0]"> </donut-display><donut-display data="donuts[1]"> </donut-display>');
     scope = $rootScope.$new();
+    scope.donuts = [
+      [1, 2, 3, 4, 5],
+      [6, 7, 8]
+    ];
+    scope.donut = scope.donuts[0];
+    console.log('pre compile', el.html()); // <== html here has {{}}
     compileFunction = $compile(el);
+
     scope.$digest();
     // bring html from templateCache
     console.log('post compile', el.html()); // <== html here has {{}}
@@ -22,7 +30,9 @@ describe('Directive: donutDisplay', function() {
       compileFunction(scope); // <== the html {{}} are bound
       scope.$digest(); // <== digest to get the render to show the bound values
       console.log('post link', el.html());
-      expect(el.find('').text().trim()).toEqual('');
+      expect(el.find('table').length).toEqual(2);
+      expect(el.find('svg').length).toEqual(2);
+      expect(el.find('path').length).toEqual(8);
     });
   });
 });
