@@ -31,4 +31,5 @@ angular.module('couchD3App').controller('MainCtrl', function($scope, $window) {
 		$scope.$apply();
 	});
 
+	$scope.selectedGraph = ['BarNvd3Ctrl','Linegraphnvd3Ctrl','LineplusbarwithfocuschartCtrl'];
 });

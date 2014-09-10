@@ -25,11 +25,18 @@
     
     <couch-json></couch-json>
     <h1>Selector for the graph</h1>
+    <select multiple ng-model="selectedGraph">
+        <option value="BarNvd3Ctrl">Bar chart</option>
+        <option value="Linegraphnvd3Ctrl">Line Graph</option>
+        <option value="LineplusbarwithfocuschartCtrl">Line and Bar with focus controller</option>
+        <option value="NA">NA</option>
+    </select>
+
     <h1>Map reduce exemple "Box" you should have for that type of graph to work</h1>
 
 
     <!-- Div for the Bar graph and it's controller. -->
-    <div ng-controller="BarNvd3Ctrl" ng-show="false">
+    <div ng-controller="BarNvd3Ctrl" ng-show="selectedGraph.indexOf('BarNvd3Ctrl') > -1">
         <nvd3 options="options" data="discreteBarCharData"></nvd3>
         <h3>
             <span ng-show="details" ng-click="details = false">Show Details</span>
@@ -42,7 +49,7 @@
     </div>
 
     <!-- Div for the Bar graph and it's controller. -->
-    <div ng-controller="Linegraphnvd3Ctrl" ng-show="false">
+    <div ng-controller="Linegraphnvd3Ctrl" ng-show="selectedGraph.indexOf('Linegraphnvd3Ctrl') > -1">
         <nvd3 options="options" data="discreteChartData"></nvd3>
         <h3>
             <span ng-show="details" ng-click="details = false">Show Details</span>
@@ -60,7 +67,7 @@ and discreteChartData[1].values[0] :
     </div>
 
     <!-- Div for the Bar graph and it's controller. -->
-    <div ng-controller="LineplusbarwithfocuschartCtrl" ng-show="true">
+    <div ng-controller="LineplusbarwithfocuschartCtrl" ng-show="selectedGraph.indexOf('LineplusbarwithfocuschartCtrl') > -1">
         <nvd3 options="options" data="discreteChartData"></nvd3>
         <h3>
             <span ng-show="details" ng-click="details = false">Show Details</span>

@@ -16,7 +16,8 @@ angular.module('couchD3App')
 			'Karma'
 		];
 
-		// Do not seems to have the possibility to add a titre in this graph.
+		// There is an error When we select the sub graph for the selection, but this is in the D3 code.
+		// Do not seems to have the possibility to add a title in this graph.
 		$scope.options = {
 			chart: {
 				type: 'linePlusBarWithFocusChart',
