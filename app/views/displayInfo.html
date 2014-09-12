@@ -1,10 +1,15 @@
 <div>
+<br>
+	<table>
+		<tr><td>Couch DB</td><td><input ng-model="fetchingInfo.dbPath"/></td></tr>
+		<tr><td>MapReduce</td><td><input ng-model="fetchingInfo.mapReduce"/></td></tr>
+		<tr><td>User:</td><td><input ng-model="fetchingInfo.user"/></td></tr>
+		<tr><td>Pass:</td><td><input ng-model="fetchingInfo.pass"/></td></tr>
+	</table>
+	<span>{{fetchingTo}}</span>
 	<button ng-click="httpGet(fetchingTo, user, pass)">
 		Fetch URL
 	</button>
-	<input ng-model="fetchingTo"/>
-	<input ng-model="user"/>
-	<input ng-model="pass"/>
 </div>
 <div>
 	<pre>{{fetchingTo | json}}</pre>
