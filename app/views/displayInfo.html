@@ -11,7 +11,9 @@
 		Fetch URL
 	</button>
 </div>
+<div ng-click="UpdateTheData(responseResult, 'UpdatedResult')">ConvertData To Graph</div>
 <div>
 	<pre>{{fetchingTo | json}}</pre>
+	<pre>{{discreteChartData | json}}</pre>
 	<pre>{{responseResult | json}}</pre>
 </div>
